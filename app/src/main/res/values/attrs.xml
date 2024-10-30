@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="StarRatingView">
+        <attr name="defaultRating" format="integer" />
+        <attr name="isRatingEnabled" format="boolean" />
+    </declare-styleable>
+</resources>

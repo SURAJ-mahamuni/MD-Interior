@@ -1,0 +1,44 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.MDInterior" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/main_color</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <style name="Theme.MDInterior" parent="Base.Theme.MDInterior" />
+
+    <style name="BottomNavigationIconStyle" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="itemRippleColor">@android:color/transparent</item>
+    </style>
+
+    <style name="topBarStyle" parent="">
+        <item name="fontFamily">@font/urbanist_medium</item>
+        <item name="android:textSize">@dimen/txt_20sp</item>
+    </style>
+
+    <style name="outlineBox" parent="">
+        <item name="android:colorPrimary">@color/white</item>
+    </style>
+
+    <style name="roundedCor" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/dimen_16dp</item>
+    </style>
+
+    <style name="CustomChipChoice" parent="@style/Widget.Material3.Chip.Filter">
+        <item name="chipBackgroundColor">@color/background_color_chip_state_list</item>
+        <item name="android:textColor">@color/text_color_chip_state_list</item>
+        <item name="strokeColor">@color/chip_strock_color_state</item>
+        <item name="chipStrokeWidth">@dimen/dimen_2dp</item>
+        <item name="chipCornerRadius">46dp</item>
+        <item name="chipStartPadding">@dimen/dimen_16dp</item>
+        <item name="chipEndPadding">@dimen/dimen_16dp</item>
+    </style>
+
+    <style name="ToolbarColoredBackArrow" parent="Theme.MDInterior">
+        <item name="android:textColorSecondary">@color/white</item>
+    </style>
+</resources>

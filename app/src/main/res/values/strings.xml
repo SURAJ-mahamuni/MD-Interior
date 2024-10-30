@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">MD Interior</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home">Home</string>
+    <string name="services">Services</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="interior_design">Interior Design</string>
+    <string name="enter_your_email_id">Enter your email id</string>
+    <string name="username">Username</string>
+    <string name="email">Email ID</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="title">Great interiors inspire comfort the moment you enter.</string>
+    <string name="explore_projects">Explore Projects</string>
+    <string name="work_we_ve_done">Work we’ve Done</string>
+    <string name="recent_work_s">Recent Work\'s</string>
+    <string name="filter">Filter</string>
+    <string name="sign_up_completed_successfully">Sign up completed successfully.</string>
+
+    <string name="please_enter_valid_email_id">Please enter valid email id.</string>
+    <string name="password_empty_error_msg">Please ensure that the password field is not left empty.</string>
+    <string name="password_must_contain_8_char_msg">Password must contain a minimum of 8 characters.</string>
+    <string name="password_and_confirm_password_do_not_match">Password and confirm password do not match.</string>
+    <string name="an_issue_occurred_on_the_server_side">An issue occurred on the server side.</string>
+    <string name="login_failed">Login failed!</string>
+    <string name="admin_login_comming_soon">Admin login comming soon...</string>
+    <string name="about_us">About Us</string>
+    <string name="about_us_value">Welcome to MD Interior, where we bring your vision to life with elegance, creativity, and precision. Founded by a team of passionate interior designers, MD Interior is dedicated to transforming spaces into captivating, functional, and inspiring environments. With expertise in both residential and commercial design, we aim to blend aesthetics with practicality, ensuring that each space reflects the unique style and needs of our clients\n.\nAt MD Interior, we believe that every detail matters. Our approach combines thoughtful design concepts, innovative solutions, and the latest industry trends to create spaces that are not only beautiful but also functional. From cozy homes to dynamic office spaces, we handle every aspect of design—from initial concept and planning to the final touches.\nWhether you’re looking for a complete makeover, a fresh new look, or a functional re-design, MD Interior is here to bring your dream space to life. Let’s make your vision a reality!\n\nFeel free to add more details or services specific to MD Interior to make it even more personal and tailored!</string>
+    <string name="reviews">Reviews</string>
+    <string name="review_value">We recently completed an elegant and functional interior design project for a cozy 1BHK apartment in the heart of Shivajinagar. Our design approach was tailored to maximize space while maintaining a modern and comfortable living environment.</string>
+    <string name="info">Info</string>
+</resources>
