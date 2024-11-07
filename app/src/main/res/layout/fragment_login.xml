@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.mdinterior.mdinterior.presentation.viewModels.LoginViewModel" />
+            type="com.mdinterior.mdinterior.presentation.viewModels.auth.LoginViewModel" />
 
     </data>
 
@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/main_color"
-        tools:context=".presentation.fragment.LoginFragment">
+        tools:context=".presentation.fragment.auth.LoginFragment">
 
 
         <ImageView

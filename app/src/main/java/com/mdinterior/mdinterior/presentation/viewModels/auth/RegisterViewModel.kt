@@ -1,4 +1,4 @@
-package com.mdinterior.mdinterior.presentation.viewModels
+package com.mdinterior.mdinterior.presentation.viewModels.auth
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -19,7 +19,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import java.util.Objects
 import javax.inject.Inject
 
 @HiltViewModel

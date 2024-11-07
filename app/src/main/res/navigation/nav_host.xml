@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_host.xml"
-    app:startDestination="@id/welcomeFragment">
+    app:startDestination="@id/splashScreenFragment">
 
     <fragment
         android:id="@+id/welcomeFragment"
-        android:name="com.mdinterior.mdinterior.presentation.fragment.WelcomeFragment"
+        android:name="com.mdinterior.mdinterior.presentation.fragment.auth.WelcomeFragment"
         android:label="fragment_welcome"
         tools:layout="@layout/fragment_welcome" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.mdinterior.mdinterior.presentation.fragment.LoginFragment"
+        android:name="com.mdinterior.mdinterior.presentation.fragment.auth.LoginFragment"
         android:label="LoginFragment" >
         <action
             android:id="@+id/action_loginFragment_to_homeFragment_client"
@@ -27,7 +27,16 @@
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.mdinterior.mdinterior.presentation.fragment.RegisterFragment"
+        android:name="com.mdinterior.mdinterior.presentation.fragment.auth.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" />
+    <fragment
+        android:id="@+id/splashScreenFragment"
+        android:name="com.mdinterior.mdinterior.presentation.fragment.startScreen.SplashScreenFragment"
+        android:label="fragment_splash_screen"
+        tools:layout="@layout/fragment_splash_screen" >
+        <action
+            android:id="@+id/action_splashScreenFragment_to_welcomeFragment"
+            app:destination="@id/welcomeFragment" />
+    </fragment>
 </navigation>

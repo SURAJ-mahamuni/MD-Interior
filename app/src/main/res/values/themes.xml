@@ -41,4 +41,9 @@
     <style name="ToolbarColoredBackArrow" parent="Theme.MDInterior">
         <item name="android:textColorSecondary">@color/white</item>
     </style>
+
+    <style name="progressStyle" parent="Widget.AppCompat.ProgressBar">
+        <item name="colorAccent">@color/white</item>
+    </style>
+
 </resources>

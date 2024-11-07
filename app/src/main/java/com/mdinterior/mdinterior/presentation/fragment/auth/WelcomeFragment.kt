@@ -1,10 +1,8 @@
-package com.mdinterior.mdinterior.presentation.fragment
+package com.mdinterior.mdinterior.presentation.fragment.auth
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
@@ -12,7 +10,7 @@ import com.mdinterior.mdinterior.R
 import com.mdinterior.mdinterior.databinding.FragmentWelcomeBinding
 import com.mdinterior.mdinterior.presentation.fragment.BindingFragment
 import com.mdinterior.mdinterior.presentation.helper.AppEvent
-import com.mdinterior.mdinterior.presentation.viewModels.WelcomeViewModel
+import com.mdinterior.mdinterior.presentation.viewModels.auth.WelcomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

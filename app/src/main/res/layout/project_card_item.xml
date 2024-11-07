@@ -41,14 +41,15 @@
                     android:id="@+id/type_of_site"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/urbanist_medium"
+                    android:fontFamily="@font/urbanist_light"
                     android:text="1BHK"
+                    android:minHeight="@dimen/dimen_10dp"
                     app:strokeColor="@color/stock_color_card"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/txt_16sp" />
+                    android:textSize="@dimen/txt_14sp" />
 
                 <TextView
-                    android:id="@+id/textView3"
+                    android:id="@+id/date_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dimen_8dp"
@@ -60,10 +61,10 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/project_title"
                 android:layout_width="@dimen/dimen_0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:fontFamily="@font/urbanist_medium"
                 android:text="1BHK Interior Design Project - Shivajinagar"
                 android:textColor="@color/white"
@@ -76,10 +77,10 @@
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/project_description"
                 android:layout_width="@dimen/dimen_0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:text="We recently completed an elegant and functional interior design project for a cozy 1BHK apartment in the heart of Shivajinagar. Our design approach was tailored to maximize space while maintaining a modern and comfortable living environment."
                 android:textColor="@color/white"
                 android:fontFamily="@font/urbanist_medium"
@@ -87,21 +88,21 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView5"
+                app:layout_constraintTop_toBottomOf="@+id/project_title"
                 app:layout_constraintVertical_bias="0.0" />
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_200dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:scaleType="centerCrop"
                 app:shapeAppearanceOverlay="@style/roundedCor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView6"
+                app:layout_constraintTop_toBottomOf="@+id/project_description"
                 app:layout_constraintVertical_bias="0.0"
                 app:srcCompat="@drawable/ic_launcher_background" />
 

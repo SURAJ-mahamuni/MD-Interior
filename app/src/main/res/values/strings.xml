@@ -31,4 +31,9 @@
     <string name="reviews">Reviews</string>
     <string name="review_value">We recently completed an elegant and functional interior design project for a cozy 1BHK apartment in the heart of Shivajinagar. Our design approach was tailored to maximize space while maintaining a modern and comfortable living environment.</string>
     <string name="info">Info</string>
+    <string name="add_project">Add Project</string>
+    <string name="recently_added_users">Recently added users</string>
+    <string name="users">Users</string>
+    <string name="projects">Projects</string>
+    <string name="title_and_location">%1$s - %2$s</string>
 </resources>

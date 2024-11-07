@@ -1,14 +1,13 @@
 package com.mdinterior.mdinterior.presentation.activity
 
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
-import androidx.activity.enableEdgeToEdge
+import android.view.WindowManager
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -21,7 +20,7 @@ import com.mdinterior.mdinterior.presentation.helper.AppEvent
 import com.mdinterior.mdinterior.presentation.helper.Constants.FILTER
 import com.mdinterior.mdinterior.presentation.helper.Extensions.hideView
 import com.mdinterior.mdinterior.presentation.helper.Extensions.showView
-import com.mdinterior.mdinterior.presentation.viewModels.ClientMainViewModel
+import com.mdinterior.mdinterior.presentation.viewModels.client.ClientMainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -47,7 +46,32 @@ class ClientActivity : ActivityBinder<ActivityClientBinding>() {
 
             fragmentDestinationHandle()
 
+            observables()
+
+            setUpUI()
+
         }
+
+    private fun setUpUI() {
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        WindowInsetsControllerCompat(window, binding.root).isAppearanceLightStatusBars = false
+    }
+
+    private fun observables() {
+        viewModel.appEvent.observe(this) {
+            when (it) {
+                is AppEvent.Other -> {
+                    setTitle(it.message)
+                }
+
+                else -> {}
+            }
+        }
+    }
+
+    private fun setTitle(title: String) {
+        binding.topBar.title = "Hello $title,"
+    }
 
     private fun fragmentDestinationHandle() {
         navController.addOnDestinationChangedListener { _, destination, _ ->

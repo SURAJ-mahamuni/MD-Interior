@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.mdinterior.mdinterior.presentation.viewModels.RegisterViewModel" />
+            type="com.mdinterior.mdinterior.presentation.viewModels.auth.RegisterViewModel" />
 
     </data>
 
@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/main_color"
-        tools:context=".presentation.fragment.RegisterFragment">
+        tools:context=".presentation.fragment.auth.RegisterFragment">
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"

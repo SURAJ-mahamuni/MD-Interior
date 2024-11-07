@@ -1,23 +1,20 @@
-package com.mdinterior.mdinterior.presentation.fragment
+package com.mdinterior.mdinterior.presentation.fragment.auth
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
-import com.mdinterior.mdinterior.R
 import com.mdinterior.mdinterior.databinding.FragmentRegisterBinding
+import com.mdinterior.mdinterior.presentation.fragment.BindingFragment
 import com.mdinterior.mdinterior.presentation.helper.AppEvent
 import com.mdinterior.mdinterior.presentation.helper.Extensions.hideView
 import com.mdinterior.mdinterior.presentation.helper.Extensions.onTouchHideKeyboard
 import com.mdinterior.mdinterior.presentation.helper.Extensions.showView
 import com.mdinterior.mdinterior.presentation.helper.Extensions.toastMsg
-import com.mdinterior.mdinterior.presentation.viewModels.RegisterViewModel
+import com.mdinterior.mdinterior.presentation.viewModels.auth.RegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -19,7 +19,7 @@ import com.mdinterior.mdinterior.presentation.fragment.BindingFragment
 import com.mdinterior.mdinterior.presentation.helper.AppEvent
 import com.mdinterior.mdinterior.presentation.helper.Extensions.hideView
 import com.mdinterior.mdinterior.presentation.helper.Extensions.showView
-import com.mdinterior.mdinterior.presentation.viewModels.ClientMainViewModel
+import com.mdinterior.mdinterior.presentation.viewModels.client.ClientMainViewModel
 import java.util.Random
 
 

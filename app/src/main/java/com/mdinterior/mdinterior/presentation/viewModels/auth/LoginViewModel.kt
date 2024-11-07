@@ -1,4 +1,4 @@
-package com.mdinterior.mdinterior.presentation.viewModels
+package com.mdinterior.mdinterior.presentation.viewModels.auth
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -18,6 +18,7 @@ import com.mdinterior.mdinterior.domain.validation.ValidationType
 import com.mdinterior.mdinterior.presentation.helper.AppEvent
 import com.mdinterior.mdinterior.presentation.helper.Constants.IS_LOGGED_IN
 import com.mdinterior.mdinterior.presentation.helper.Constants.USER_DATA
+import com.mdinterior.mdinterior.presentation.helper.Constants.USER_TYPE
 import com.mdinterior.mdinterior.presentation.model.LoginUiData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -44,7 +45,10 @@ class LoginViewModel @Inject constructor(
 
     private fun saveUserDataInDataStore(documentSnapshot: DocumentSnapshot) {
         viewModelScope.launch(Dispatchers.IO) {
-            dataStoreManager.setDataInDataStore(USER_DATA,documentSnapshot.getString("username") ?: "")
+            async {
+                dataStoreManager.setDataInDataStore(USER_DATA,documentSnapshot.getString("username") ?: "")
+            }.await()
+            dataStoreManager.setDataInDataStore(USER_TYPE,documentSnapshot.getString("isAdmin") ?: "")
         }
     }
 

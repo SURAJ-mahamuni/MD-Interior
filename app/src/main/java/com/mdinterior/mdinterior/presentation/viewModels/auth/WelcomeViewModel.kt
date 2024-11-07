@@ -1,4 +1,4 @@
-package com.mdinterior.mdinterior.presentation.viewModels
+package com.mdinterior.mdinterior.presentation.viewModels.auth
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

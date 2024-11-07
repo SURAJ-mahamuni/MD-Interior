@@ -4,6 +4,7 @@ object Constants {
     const val FILTER = "Filter"
 
     const val USER_DATA = "userData"
+    const val USER_TYPE = "user_type"
 
     const val IS_LOGGED_IN = "Is_Logged_In"
 
