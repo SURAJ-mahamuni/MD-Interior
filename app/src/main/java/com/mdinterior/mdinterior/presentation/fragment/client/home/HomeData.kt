@@ -6,14 +6,19 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class HomeData (
+    val user: List<User>? = null
+) : Parcelable
+
+@Parcelize
+data class User (
     val dashboard: Dashboard? = null,
-
+    val userId: String? = null,
     @SerializedName("emailId")
-    val emailID: String? = null,
-
-    val isAdmin: Boolean? = null,
+    val emailId: String? = null,
+    @SerializedName("isClient")
+    val isClient: String? = null,
     val mobileNumber: String? = null,
-    val name: String? = null
+    val name: String? = null,
 ) : Parcelable
 
 @Parcelize

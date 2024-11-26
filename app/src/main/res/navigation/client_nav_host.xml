@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/home_menu"
-        android:name="com.mdinterior.mdinterior.presentation.fragment.client.HomeFragment"
+        android:name="com.mdinterior.mdinterior.presentation.fragment.client.home.HomeFragment"
         android:label="Hello name,"
         tools:layout="@layout/fragment_home" >
         <action
@@ -16,12 +16,12 @@
     </fragment>
     <fragment
         android:id="@+id/services_menu"
-        android:name="com.mdinterior.mdinterior.presentation.fragment.client.ServicesFragment"
+        android:name="com.mdinterior.mdinterior.presentation.fragment.client.service.ServicesFragment"
         android:label="Services"
         tools:layout="@layout/fragment_services" />
     <fragment
         android:id="@+id/projectsFragment"
-        android:name="com.mdinterior.mdinterior.presentation.fragment.client.ProjectsFragment"
+        android:name="com.mdinterior.mdinterior.presentation.fragment.project.ProjectsFragment"
         android:label="Projects"
         tools:layout="@layout/fragment_projects" />
     <fragment

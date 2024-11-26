@@ -29,8 +29,5 @@ class ClientMainViewModel @Inject constructor(private val dataStoreManager: Data
             }.await()
             _appEvent.postValue(AppEvent.Other(username))
         }
-
     }
-
-
 }

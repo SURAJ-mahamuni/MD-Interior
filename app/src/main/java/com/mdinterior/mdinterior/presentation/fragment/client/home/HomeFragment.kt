@@ -1,4 +1,4 @@
-package com.mdinterior.mdinterior.presentation.fragment.client
+package com.mdinterior.mdinterior.presentation.fragment.client.home
 
 import android.os.Bundle
 import android.util.Log
@@ -12,12 +12,8 @@ import com.mdinterior.mdinterior.R
 import com.mdinterior.mdinterior.databinding.FragmentHomeBinding
 import com.mdinterior.mdinterior.databinding.ProjectCardItemBinding
 import com.mdinterior.mdinterior.domain.firebase.FireBaseEvents
-import com.mdinterior.mdinterior.presentation.model.DemoData
 import com.mdinterior.mdinterior.presentation.adapter.GenericAdapter
 import com.mdinterior.mdinterior.presentation.fragment.BindingFragment
-import com.mdinterior.mdinterior.presentation.fragment.client.home.AllProjects
-import com.mdinterior.mdinterior.presentation.fragment.client.home.HomeData
-import com.mdinterior.mdinterior.presentation.fragment.client.home.Project
 import com.mdinterior.mdinterior.presentation.helper.AppEvent
 import com.mdinterior.mdinterior.presentation.helper.Extensions.hideView
 import com.mdinterior.mdinterior.presentation.helper.Extensions.showView
@@ -89,8 +85,8 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>() {
                 }
 
                 is FireBaseEvents.FirebaseSuccess -> {
-                    val data = JsonConvertor.jsonToObject<HomeData>(it.data)
-                    Log.e("home", data.toString())
+                    val data = JsonConvertor.jsonToObject<User>(it.data)
+                    Log.e("user", data.toString())
                     binding.progressBar5.hideView()
                 }
             }

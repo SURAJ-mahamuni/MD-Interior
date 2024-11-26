@@ -1,6 +1,5 @@
 package com.mdinterior.mdinterior.presentation.viewModels.admin
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,7 +7,6 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
-import com.mdinterior.mdinterior.R
 import com.mdinterior.mdinterior.domain.firebase.FireBaseEvents
 import com.mdinterior.mdinterior.presentation.fragment.client.home.HomeData
 import com.mdinterior.mdinterior.presentation.helper.AppEvent
@@ -17,20 +15,15 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class AdminHomeViewModel @Inject constructor(
+class AdminUserViewModel @Inject constructor(
     private val databaseReference: DatabaseReference
-) :
-    ViewModel() {
+) : ViewModel() {
 
     var _appEvent: MutableLiveData<AppEvent> = MutableLiveData()
 
     val appEvent: LiveData<AppEvent> get() = _appEvent
 
     var userList = MutableLiveData<FireBaseEvents>()
-
-    fun openAppProject() {
-        _appEvent.postValue(AppEvent.NavigateFragmentEvent(R.id.addProjectFragment))
-    }
 
     fun getUserList() {
         userList.postValue(FireBaseEvents.FirebaseLoading)
@@ -61,7 +54,4 @@ class AdminHomeViewModel @Inject constructor(
                 }
             })
     }
-
-
-
 }

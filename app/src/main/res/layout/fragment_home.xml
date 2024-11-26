@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/main_color"
-        tools:context=".presentation.fragment.client.HomeFragment">
+        tools:context=".presentation.fragment.client.home.HomeFragment">
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"

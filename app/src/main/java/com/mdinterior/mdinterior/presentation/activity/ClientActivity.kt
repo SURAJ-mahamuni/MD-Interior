@@ -61,7 +61,8 @@ class ClientActivity : ActivityBinder<ActivityClientBinding>() {
         viewModel.appEvent.observe(this) {
             when (it) {
                 is AppEvent.Other -> {
-                    setTitle(it.message)
+                    if (it.message != FILTER)
+                        setTitle(it.message)
                 }
 
                 else -> {}
@@ -89,6 +90,11 @@ class ClientActivity : ActivityBinder<ActivityClientBinding>() {
                 }
 
                 R.id.services_menu -> {
+                    binding.topBar.menu.findItem(R.id.menu_filter).isVisible = false
+                    binding.topBarLayout.showView()
+                    binding.bottomNavigationView.showView()
+                }
+                R.id.info_menu -> {
                     binding.topBar.menu.findItem(R.id.menu_filter).isVisible = false
                     binding.topBarLayout.showView()
                     binding.bottomNavigationView.showView()

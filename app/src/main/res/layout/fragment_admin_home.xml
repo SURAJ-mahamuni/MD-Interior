@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/main_color"
-        tools:context=".presentation.fragment.admin.AdminHomeFragment">
+        tools:context=".presentation.fragment.admin.home.AdminHomeFragment">
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -90,9 +90,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="40dp"
                             android:layout_marginTop="16dp"
-                            android:onClick="@{()->viewModel.openAppProject()}"
                             android:backgroundTint="@color/white"
                             android:fontFamily="@font/urbanist_medium"
+                            android:onClick="@{()->viewModel.openAppProject()}"
                             android:paddingHorizontal="@dimen/dimen_12dp"
                             android:text="@string/add_project"
                             android:textColor="@color/black"
@@ -120,12 +120,13 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/materialCardView"
                     app:layout_constraintVertical_bias="0.0" />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recently_added_users_rv"
                     android:layout_width="@dimen/dimen_0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     android:layout_marginHorizontal="@dimen/dimen_8dp"
+                    android:layout_marginTop="8dp"
                     android:orientation="vertical"
                     android:overScrollMode="never"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -136,6 +137,19 @@
                     app:layout_constraintTop_toBottomOf="@+id/recently_added_users"
                     app:layout_constraintVertical_bias="0.0"
                     tools:listitem="@layout/user_item" />
+
+                <ProgressBar
+                    android:id="@+id/progressBar4"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:indeterminateTint="@color/white"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

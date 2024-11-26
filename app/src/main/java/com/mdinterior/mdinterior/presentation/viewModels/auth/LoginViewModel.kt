@@ -18,6 +18,7 @@ import com.mdinterior.mdinterior.domain.validation.ValidationType
 import com.mdinterior.mdinterior.presentation.helper.AppEvent
 import com.mdinterior.mdinterior.presentation.helper.Constants.IS_LOGGED_IN
 import com.mdinterior.mdinterior.presentation.helper.Constants.USER_DATA
+import com.mdinterior.mdinterior.presentation.helper.Constants.USER_ID
 import com.mdinterior.mdinterior.presentation.helper.Constants.USER_TYPE
 import com.mdinterior.mdinterior.presentation.model.LoginUiData
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -43,18 +44,33 @@ class LoginViewModel @Inject constructor(
         _appEvent.postValue(AppEvent.NavigateBackEvent(""))
     }
 
-    private fun saveUserDataInDataStore(documentSnapshot: DocumentSnapshot) {
+    private fun saveUserDataInDataStore(
+        documentSnapshot: DocumentSnapshot,
+        authResult: AuthResult
+    ) {
         viewModelScope.launch(Dispatchers.IO) {
             async {
-                dataStoreManager.setDataInDataStore(USER_DATA,documentSnapshot.getString("username") ?: "")
+                dataStoreManager.setDataInDataStore(
+                    USER_DATA,
+                    documentSnapshot.getString("username") ?: ""
+                )
             }.await()
-            dataStoreManager.setDataInDataStore(USER_TYPE,documentSnapshot.getString("isAdmin") ?: "")
+            async {
+                dataStoreManager.setDataInDataStore(
+                    USER_TYPE,
+                    documentSnapshot.getString("isAdmin") ?: ""
+                )
+            }.await()
+            dataStoreManager.setDataInDataStore(
+                USER_ID,
+                authResult.user?.uid ?: ""
+            )
         }
     }
 
-    fun setLoggedIn(){
+    fun setLoggedIn() {
         viewModelScope.launch {
-            dataStoreManager.setDataInDataStore(IS_LOGGED_IN,"true")
+            dataStoreManager.setDataInDataStore(IS_LOGGED_IN, "true")
         }
     }
 
@@ -73,6 +89,7 @@ class LoginViewModel @Inject constructor(
                     ).apply {
                         addOnSuccessListener { authResult ->
                             Log.e("user", "login")
+                            authResult.user?.uid
                             checkUserData(authResult)
                         }
                         addOnFailureListener {
@@ -99,13 +116,13 @@ class LoginViewModel @Inject constructor(
                 val isAdmin = it.getString("isAdmin")
                 Log.e("user", isAdmin.toString())
                 if (isAdmin == "0") {
-                    saveUserDataInDataStore(it)
+                    saveUserDataInDataStore(it, authResult)
                     _appEvent.postValue(AppEvent.Other("hide_progressBar"))
                     viewModelScope.launch(Dispatchers.Default) {
                         async { _appEvent.postValue(AppEvent.NavigateFragmentEvent(0)) }.await()
                     }
                 } else if (isAdmin == "1") {
-                    saveUserDataInDataStore(it)
+                    saveUserDataInDataStore(it, authResult)
                     _appEvent.postValue(AppEvent.Other("hide_progressBar"))
                     viewModelScope.launch(Dispatchers.Default) {
                         async { _appEvent.postValue(AppEvent.NavigateFragmentEvent(1)) }.await()
