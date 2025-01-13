@@ -115,14 +115,13 @@ class LoginViewModel @Inject constructor(
             addOnSuccessListener {
                 val isAdmin = it.getString("isAdmin")
                 Log.e("user", isAdmin.toString())
+                saveUserDataInDataStore(it, authResult)
                 if (isAdmin == "0") {
-                    saveUserDataInDataStore(it, authResult)
                     _appEvent.postValue(AppEvent.Other("hide_progressBar"))
                     viewModelScope.launch(Dispatchers.Default) {
                         async { _appEvent.postValue(AppEvent.NavigateFragmentEvent(0)) }.await()
                     }
                 } else if (isAdmin == "1") {
-                    saveUserDataInDataStore(it, authResult)
                     _appEvent.postValue(AppEvent.Other("hide_progressBar"))
                     viewModelScope.launch(Dispatchers.Default) {
                         async { _appEvent.postValue(AppEvent.NavigateFragmentEvent(1)) }.await()

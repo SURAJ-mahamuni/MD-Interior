@@ -36,4 +36,5 @@
     <string name="users">Users</string>
     <string name="projects">Projects</string>
     <string name="title_and_location">%1$s - %2$s</string>
+    <string name="user_id_not_match">User Id Not match!</string>
 </resources>

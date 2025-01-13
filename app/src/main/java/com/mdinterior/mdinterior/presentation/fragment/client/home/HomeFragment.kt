@@ -17,6 +17,7 @@ import com.mdinterior.mdinterior.presentation.fragment.BindingFragment
 import com.mdinterior.mdinterior.presentation.helper.AppEvent
 import com.mdinterior.mdinterior.presentation.helper.Extensions.hideView
 import com.mdinterior.mdinterior.presentation.helper.Extensions.showView
+import com.mdinterior.mdinterior.presentation.helper.Extensions.toastMsg
 import com.mdinterior.mdinterior.presentation.helper.JsonConvertor
 import com.mdinterior.mdinterior.presentation.viewModels.client.ClientHomeViewModel
 import com.mdinterior.mdinterior.presentation.viewModels.client.ClientMainViewModel
@@ -68,6 +69,8 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>() {
                 is AppEvent.NavigateFragmentEvent -> {
                     findNavController().navigate(HomeFragmentDirections.actionHomeMenuToProjectsFragment())
                 }
+
+                is AppEvent.ToastEvent -> toastMsg(getString(it.message))
 
                 else -> {}
             }

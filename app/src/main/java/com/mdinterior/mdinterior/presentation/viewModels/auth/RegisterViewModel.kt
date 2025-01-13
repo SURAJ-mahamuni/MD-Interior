@@ -7,12 +7,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.mdinterior.mdinterior.R
 import com.mdinterior.mdinterior.domain.validation.ValidationData
 import com.mdinterior.mdinterior.domain.validation.ValidationEvent
 import com.mdinterior.mdinterior.domain.validation.ValidationManager
 import com.mdinterior.mdinterior.domain.validation.ValidationType
+import com.mdinterior.mdinterior.presentation.fragment.client.home.User
 import com.mdinterior.mdinterior.presentation.helper.AppEvent
 import com.mdinterior.mdinterior.presentation.model.RegisterUIData
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -25,6 +28,7 @@ import javax.inject.Inject
 class RegisterViewModel @Inject constructor(
     private val firebaseAuth: FirebaseAuth,
     private val firebaseFireStore: FirebaseFirestore,
+    private val databaseReference: DatabaseReference,
 ) : ViewModel() {
 
     var _appEvent: MutableLiveData<AppEvent> = MutableLiveData()
@@ -80,13 +84,35 @@ class RegisterViewModel @Inject constructor(
         }
         df.set(map).apply {
             addOnSuccessListener {
-                _appEvent.postValue(AppEvent.Other("hide_progressBar"))
-                viewModelScope.launch(Dispatchers.Default) {
-                    async { _appEvent.postValue(AppEvent.ToastEvent(R.string.sign_up_completed_successfully))
-                        _appEvent.postValue(AppEvent.NavigateBackEvent(""))}.await()
-                }
+                saveUserValues(authResult.user?.uid)
             }
             addOnFailureListener {
+                _appEvent.postValue(AppEvent.Other("hide_progressBar"))
+                viewModelScope.launch(Dispatchers.Default) {
+                    async { _appEvent.postValue(AppEvent.ToastEvent(R.string.an_issue_occurred_on_the_server_side)) }.await()
+                }
+            }
+        }
+    }
+
+    private fun saveUserValues(uid: String?) {
+        FirebaseDatabase.getInstance().getReference("data").child("users").child("user").let {
+            it.child(uid ?: "").setValue(
+                User(
+                    userId = uid,
+                    name = registerUiData.value?.username,
+                    isClient = "0",
+                    emailId = registerUiData.value?.emailId
+                )
+            ).addOnSuccessListener {
+                _appEvent.postValue(AppEvent.Other("hide_progressBar"))
+                viewModelScope.launch(Dispatchers.Default) {
+                    async {
+                        _appEvent.postValue(AppEvent.ToastEvent(R.string.sign_up_completed_successfully))
+                        _appEvent.postValue(AppEvent.NavigateBackEvent(""))
+                    }.await()
+                }
+            }.addOnFailureListener {
                 _appEvent.postValue(AppEvent.Other("hide_progressBar"))
                 viewModelScope.launch(Dispatchers.Default) {
                     async { _appEvent.postValue(AppEvent.ToastEvent(R.string.an_issue_occurred_on_the_server_side)) }.await()

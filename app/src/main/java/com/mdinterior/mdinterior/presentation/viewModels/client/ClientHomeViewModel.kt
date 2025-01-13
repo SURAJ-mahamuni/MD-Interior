@@ -27,7 +27,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ClientHomeViewModel @Inject constructor(
     private val databaseReference: DatabaseReference,
-    private val dataStoreManager: DataStoreManager
+    private val dataStoreManager: DataStoreManager,
 ) :
     ViewModel() {
 
@@ -38,8 +38,6 @@ class ClientHomeViewModel @Inject constructor(
     var homeData = MutableLiveData<FireBaseEvents>()
 
     var homeDataRecentWorkData = MutableLiveData<FireBaseEvents>()
-
-    var homeDataUI = HomeData()
 
     fun openProject() {
         _appEvent.postValue(AppEvent.NavigateFragmentEvent(R.id.projectsFragment))
@@ -58,17 +56,26 @@ class ClientHomeViewModel @Inject constructor(
                                 USER_ID = dataStoreManager.getDataStoreValue(
                                     Constants.USER_ID
                                 ).toString()
+                                Log.e("Saved USER ID", USER_ID)
                             }.await()
-                            val data: User =
+                            Log.e("all users",snapshot.getValue(HomeData::class.java)?.user.toString())
+                            val data =
                                 snapshot.getValue(HomeData::class.java)?.user?.filter { it.userId == USER_ID }
-                                    ?.get(0) ?: User()
-                            Log.e("userData",data.toString() + " user id " + USER_ID)
-                            homeData.postValue(
-                                FireBaseEvents.FirebaseSuccess(
-                                    JsonConvertor.toJason(data),
-                                    false
-                                )
-                            )
+                            if (!data.isNullOrEmpty()) {
+                                data[0].let { user ->
+                                    Log.e("userData", user.toString() + " user id " + USER_ID)
+                                    homeData.postValue(
+                                        FireBaseEvents.FirebaseSuccess(
+                                            JsonConvertor.toJason(user),
+                                            false
+                                        )
+                                    )
+                                }
+
+                            } else {
+                                _appEvent.postValue(AppEvent.ToastEvent(R.string.user_id_not_match))
+                            }
+
                         }
                     } else {
                         homeData.postValue(

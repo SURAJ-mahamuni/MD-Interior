@@ -11,7 +11,6 @@ data class HomeData (
 
 @Parcelize
 data class User (
-    val dashboard: Dashboard? = null,
     val userId: String? = null,
     @SerializedName("emailId")
     val emailId: String? = null,
