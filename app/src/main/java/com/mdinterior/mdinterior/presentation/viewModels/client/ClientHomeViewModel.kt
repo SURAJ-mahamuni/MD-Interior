@@ -17,6 +17,7 @@ import com.mdinterior.mdinterior.presentation.fragment.client.home.HomeData
 import com.mdinterior.mdinterior.presentation.fragment.client.home.User
 import com.mdinterior.mdinterior.presentation.helper.AppEvent
 import com.mdinterior.mdinterior.presentation.helper.Constants
+import com.mdinterior.mdinterior.presentation.helper.Constants.PARENT
 import com.mdinterior.mdinterior.presentation.helper.JsonConvertor
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -45,54 +46,67 @@ class ClientHomeViewModel @Inject constructor(
 
     fun getHomeData() {
         homeData.postValue(FireBaseEvents.FirebaseLoading)
-        databaseReference.child("data").child("users")
-            .addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    if (snapshot.exists()) {
-                        Log.e("homeViewModel", snapshot.getValue(HomeData::class.java).toString())
-                        viewModelScope.launch(Dispatchers.IO) {
-                            var USER_ID = ""
-                            async {
-                                USER_ID = dataStoreManager.getDataStoreValue(
-                                    Constants.USER_ID
-                                ).toString()
-                                Log.e("Saved USER ID", USER_ID)
-                            }.await()
-                            Log.e("all users",snapshot.getValue(HomeData::class.java)?.user.toString())
-                            val data =
-                                snapshot.getValue(HomeData::class.java)?.user?.filter { it.userId == USER_ID }
-                            if (!data.isNullOrEmpty()) {
-                                data[0].let { user ->
-                                    Log.e("userData", user.toString() + " user id " + USER_ID)
-                                    homeData.postValue(
-                                        FireBaseEvents.FirebaseSuccess(
-                                            JsonConvertor.toJason(user),
-                                            false
+        var USER_ID = ""
+        viewModelScope.launch(Dispatchers.IO) {
+            async {
+                USER_ID = dataStoreManager.getDataStoreValue(
+                    Constants.USER_ID
+                ).toString()
+                Log.e("Saved USER ID", USER_ID)
+            }.await()
+            databaseReference.child(PARENT).child(Constants.CHILD1).child(Constants.CHILD2).child(USER_ID)
+                .addValueEventListener(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        if (snapshot.exists()) {
+                            viewModelScope.launch(Dispatchers.IO) {
+                                var USER_ID = ""
+                                async {
+                                    USER_ID = dataStoreManager.getDataStoreValue(
+                                        Constants.USER_ID
+                                    ).toString()
+                                    Log.e("Saved USER ID", USER_ID)
+                                }.await()
+                                Log.e(
+                                    "all users",
+                                    snapshot.getValue(User::class.java).toString()
+                                )
+                                val data =
+                                    snapshot.getValue(User::class.java)
+
+                                if (data?.emailId != null) {
+                                    data.let { user ->
+                                        Log.e("userData", user.toString() + " user id " + USER_ID)
+                                        homeData.postValue(
+                                            FireBaseEvents.FirebaseSuccess(
+                                                JsonConvertor.toJason(user),
+                                                false
+                                            )
                                         )
-                                    )
+                                    }
+
+                                } else {
+                                    _appEvent.postValue(AppEvent.ToastEvent(R.string.user_id_not_match))
                                 }
 
-                            } else {
-                                _appEvent.postValue(AppEvent.ToastEvent(R.string.user_id_not_match))
                             }
-
-                        }
-                    } else {
-                        homeData.postValue(
-                            FireBaseEvents.FirebaseSuccess(
-                                snapshot.value.toString(),
-                                true
+                        } else {
+                            homeData.postValue(
+                                FireBaseEvents.FirebaseSuccess(
+                                    snapshot.value.toString(),
+                                    true
+                                )
                             )
+                        }
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        homeData.postValue(
+                            FireBaseEvents.FirebaseError(error.message)
                         )
                     }
-                }
+                })
+        }
 
-                override fun onCancelled(error: DatabaseError) {
-                    homeData.postValue(
-                        FireBaseEvents.FirebaseError(error.message)
-                    )
-                }
-            })
     }
 
     fun getHomeRecentWorkData() {

@@ -11,14 +11,18 @@ import com.google.firebase.database.ValueEventListener
 import com.mdinterior.mdinterior.R
 import com.mdinterior.mdinterior.domain.firebase.FireBaseEvents
 import com.mdinterior.mdinterior.presentation.fragment.client.home.HomeData
+import com.mdinterior.mdinterior.presentation.fragment.client.home.User
 import com.mdinterior.mdinterior.presentation.helper.AppEvent
+import com.mdinterior.mdinterior.presentation.helper.Constants.CHILD1
+import com.mdinterior.mdinterior.presentation.helper.Constants.CHILD2
+import com.mdinterior.mdinterior.presentation.helper.Constants.PARENT
 import com.mdinterior.mdinterior.presentation.helper.JsonConvertor
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class AdminHomeViewModel @Inject constructor(
-    private val databaseReference: DatabaseReference
+    private val databaseReference: DatabaseReference,
 ) :
     ViewModel() {
 
@@ -34,16 +38,26 @@ class AdminHomeViewModel @Inject constructor(
 
     fun getUserList() {
         userList.postValue(FireBaseEvents.FirebaseLoading)
-        databaseReference.child("data").child("users")
+        databaseReference.child(PARENT).child(CHILD1).child(CHILD2)
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.exists()) {
-                        userList.postValue(
-                            FireBaseEvents.FirebaseSuccess(
-                                JsonConvertor.toJason(snapshot.getValue(HomeData::class.java)),
-                                false
+                        val userListTemp = mutableListOf<User>()
+                        for (userSnapshot in snapshot.children) {
+                            Log.e("user", userSnapshot.toString())
+                            // Convert each child into a User object
+                            val user = userSnapshot.getValue(User::class.java)
+                            if (user != null) {
+                                userListTemp.add(user)
+                            }
+                            userList.postValue(
+                                FireBaseEvents.FirebaseSuccess(
+                                    JsonConvertor.toJason(HomeData(userListTemp)),
+                                    false
+                                )
                             )
-                        )
+                        }
+
                     } else {
                         userList.postValue(
                             FireBaseEvents.FirebaseSuccess(
@@ -61,7 +75,5 @@ class AdminHomeViewModel @Inject constructor(
                 }
             })
     }
-
-
 
 }

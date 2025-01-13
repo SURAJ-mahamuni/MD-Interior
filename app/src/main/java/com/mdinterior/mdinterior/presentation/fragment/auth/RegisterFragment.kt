@@ -54,24 +54,27 @@ class RegisterFragment : BindingFragment<FragmentRegisterBinding>() {
                         binding.progressBar.isEnabled = false
                         binding.progressBar.showView()
                     }
-                    viewModel._appEvent.postValue(null)
                 }
 
                 is AppEvent.NavigateBackEvent -> {
                     findNavController().navigateUp()
-                    viewModel._appEvent.postValue(null)
+                    binding.progressBar.hideView()
                 }
 
                 is AppEvent.ToastEvent -> {
-                    Log.e("toast",getString(it.message))
+                    Log.e("toast", getString(it.message))
                     toastMsg(getString(it.message))
-                    viewModel._appEvent.postValue(null)
+                    binding.progressBar.hideView()
                 }
 
-                else -> {
-
+                is AppEvent.ToastEventString -> {
+                    toastMsg(it.message)
+                    binding.progressBar.hideView()
                 }
+
+                else -> {}
             }
+            viewModel._appEvent.postValue(null)
 
         }
     }

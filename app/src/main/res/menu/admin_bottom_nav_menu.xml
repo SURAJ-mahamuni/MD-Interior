@@ -13,5 +13,9 @@
         android:id="@+id/admin_projects_menu"
         android:icon="@drawable/projects_ic"
         android:title="@string/projects" />
+    <item
+        android:id="@+id/admin_profile_menu"
+        android:icon="@drawable/info_ic"
+        android:title="@string/profile" />
 
 </menu>

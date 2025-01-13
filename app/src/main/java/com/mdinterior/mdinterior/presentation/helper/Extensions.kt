@@ -1,6 +1,7 @@
 package com.mdinterior.mdinterior.presentation.helper
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
@@ -30,6 +31,10 @@ object Extensions {
 
     fun Fragment.toastMsg(msg : String){
         Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
+    }
+
+    fun Activity.toastMsg(msg : String){
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 
     @SuppressLint("ClickableViewAccessibility")

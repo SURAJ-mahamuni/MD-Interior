@@ -29,4 +29,9 @@
         android:name="com.mdinterior.mdinterior.presentation.fragment.project.ProjectsFragment"
         android:label="Projects"
         tools:layout="@layout/fragment_projects" />
+    <fragment
+        android:id="@+id/admin_profile_menu"
+        android:name="com.mdinterior.mdinterior.presentation.fragment.client.InfoFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_info" />
 </navigation>

@@ -1,5 +1,6 @@
 package com.mdinterior.mdinterior.domain.datastore
 
+import android.content.Context
 import android.util.Log
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
@@ -24,4 +25,14 @@ class DataStoreManager @Inject constructor(
         )
         return dataStoreProvider.getDataStore().data.first()[stringPreferencesKey(key)]
     }
+
+    suspend fun clearDataStore(
+        context: Context
+    ) {
+        val dataStore = dataStoreProvider.getDataStore()
+        dataStore.edit {
+            it.clear()
+        }
+    }
+
 }

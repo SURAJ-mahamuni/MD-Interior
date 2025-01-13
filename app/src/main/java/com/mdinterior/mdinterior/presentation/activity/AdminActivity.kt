@@ -1,5 +1,6 @@
 package com.mdinterior.mdinterior.presentation.activity
 
+import android.content.Intent
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.Menu
@@ -62,11 +63,18 @@ class AdminActivity : ActivityBinder<ActivityAdminBinding>() {
                         setTitle(it.message)
                 }
 
+                is AppEvent.NavigateActivityEvent -> {
+                    if (it.screenID == Constants.LOGOUT) {
+                        val intent = Intent(this@AdminActivity, MainActivity::class.java)
+                        startActivity(intent)
+                    }
+                }
+
                 else -> {}
             }
+            viewModel._appEvent.postValue(null)
         }
     }
-
 
 
     private fun setUpUI() {
@@ -90,6 +98,11 @@ class AdminActivity : ActivityBinder<ActivityAdminBinding>() {
                 true
             }
 
+            R.id.menu_logout -> {
+                viewModel.logout()
+                true
+            }
+
             else -> false
         }
     }
@@ -99,25 +112,39 @@ class AdminActivity : ActivityBinder<ActivityAdminBinding>() {
             when (destination.id) {
                 R.id.admin_home_menu -> {
                     binding.topBar.menu.findItem(R.id.menu_filter).isVisible = false
+                    binding.topBar.menu.findItem(R.id.menu_dot).isVisible = false
                     binding.topBarLayout.showView()
                     binding.bottomNavigationView.showView()
                 }
+
                 R.id.admin_users_menu -> {
                     binding.topBar.menu.findItem(R.id.menu_filter).isVisible = false
+                    binding.topBar.menu.findItem(R.id.menu_dot).isVisible = false
                     binding.topBarLayout.showView()
                     binding.bottomNavigationView.showView()
                 }
+
                 R.id.admin_projects_menu -> {
                     binding.topBar.menu.findItem(R.id.menu_filter).isVisible = true
+                    binding.topBar.menu.findItem(R.id.menu_dot).isVisible = false
+                    binding.topBarLayout.showView()
+                    binding.bottomNavigationView.showView()
+                }
+
+                R.id.admin_profile_menu -> {
+                    binding.topBar.menu.findItem(R.id.menu_filter).isVisible = false
+                    binding.topBar.menu.findItem(R.id.menu_dot).isVisible = true
                     binding.topBarLayout.showView()
                     binding.bottomNavigationView.showView()
                 }
             }
         }
     }
+
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
+
     private fun initializeNavController() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragment_container_admin) as NavHostFragment
@@ -129,7 +156,8 @@ class AdminActivity : ActivityBinder<ActivityAdminBinding>() {
             setOf(
                 R.id.admin_home_menu,
                 R.id.admin_users_menu,
-                R.id.admin_projects_menu
+                R.id.admin_projects_menu,
+                R.id.admin_profile_menu
             )
         )
         setSupportActionBar(binding.topBar)

@@ -2,6 +2,7 @@ package com.mdinterior.mdinterior.presentation.helper
 
 sealed class AppEvent() {
     data class ToastEvent(val message: Int) : AppEvent()
+    data class ToastEventString(val message: String) : AppEvent()
     data class NavigateFragmentEvent(val screenID: Int?) : AppEvent()
     data class NavigateActivityEvent(val screenID: String?) : AppEvent()
     data class NavigateBackEvent(val message: String) : AppEvent()

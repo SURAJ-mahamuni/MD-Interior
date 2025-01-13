@@ -8,4 +8,27 @@
         android:title="@string/filter"
         android:visible="false"
         app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/menu_dot"
+        android:layout_width="@dimen/dimen_100dp"
+        android:layout_height="wrap_content"
+        android:checkable="true"
+        android:enabled="true"
+        android:visible="false"
+        android:icon="@drawable/logout_menu_ic"
+        android:title="@string/menu_logout"
+        app:showAsAction="ifRoom">
+        <menu>
+            <item
+                android:id="@+id/menu_logout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="true"
+                android:icon="@drawable/logout_md_ic"
+                android:title="@string/logout"
+                app:showAsAction="ifRoom" />
+
+        </menu>
+    </item>
 </menu>
