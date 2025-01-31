@@ -10,4 +10,5 @@
     <color name="yellow">#FFC106</color>
     <color name="gray">#C1C1C1</color>
     <color name="menu_bg">#595C7A</color>
+    <color name="btn_color_dark_grey">#343E4F</color>
 </resources>

@@ -1,15 +1,20 @@
 package com.mdinterior.mdinterior.presentation.helper
 
+import android.R
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.Dialog
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.viewbinding.ViewBinding
 
 object Extensions {
     fun Fragment.backPressedHandle(handle: () -> Unit) {
@@ -29,11 +34,11 @@ object Extensions {
         visibility = View.VISIBLE
     }
 
-    fun Fragment.toastMsg(msg : String){
+    fun Fragment.toastMsg(msg: String) {
         Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
     }
 
-    fun Activity.toastMsg(msg : String){
+    fun Activity.toastMsg(msg: String) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 
@@ -64,6 +69,19 @@ object Extensions {
                 ContextCompat.getSystemService(requireContext(), InputMethodManager::class.java)!!
             inputMethodManager.hideSoftInputFromWindow(it.windowToken, 0)
         }
+    }
+
+    fun <VB : ViewBinding> Fragment.showCustomDialog(
+        bindingInflater: (LayoutInflater) -> VB,
+        onBind: (VB, Dialog) -> Unit,
+    ) {
+        val dialog = Dialog(requireContext())
+        val dialogBinding = bindingInflater(layoutInflater)
+        onBind(dialogBinding, dialog)
+        dialog.setContentView(dialogBinding.root)
+        dialog.window?.setBackgroundDrawableResource(R.color.transparent)
+        dialog.show()
+
     }
 
 }

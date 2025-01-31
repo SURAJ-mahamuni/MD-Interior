@@ -88,8 +88,8 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>() {
                 }
 
                 is FireBaseEvents.FirebaseSuccess -> {
-                    val data = JsonConvertor.jsonToObject<User>(it.data)
-                    Log.e("user", data.toString())
+//                    val data = JsonConvertor.jsonToObject<User>(it.data)
+//                    Log.e("user", data.toString())
                     binding.progressBar5.hideView()
                 }
             }

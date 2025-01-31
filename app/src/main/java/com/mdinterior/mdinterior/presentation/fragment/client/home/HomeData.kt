@@ -15,7 +15,7 @@ data class User (
     @SerializedName("emailId")
     val emailId: String? = null,
     @SerializedName("isClient")
-    val isClient: String? = null,
+    val client: String? = null,
     val mobileNumber: String? = null,
     val name: String? = null,
 ) : Parcelable

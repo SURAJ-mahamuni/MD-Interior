@@ -112,7 +112,7 @@ class RegisterViewModel @Inject constructor(
                 User(
                     userId = uid,
                     name = registerUiData.value?.username,
-                    isClient = CLIENT_YES,
+                    client = CLIENT_YES,
                     emailId = registerUiData.value?.emailId
                 )
             ).addOnSuccessListener {

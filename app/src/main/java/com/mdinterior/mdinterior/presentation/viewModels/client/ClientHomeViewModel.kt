@@ -106,7 +106,6 @@ class ClientHomeViewModel @Inject constructor(
                     }
                 })
         }
-
     }
 
     fun getHomeRecentWorkData() {
