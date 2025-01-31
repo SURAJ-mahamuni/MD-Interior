@@ -37,6 +37,7 @@ import java.util.Random
 class ProjectsFragment : BindingFragment<FragmentProjectsBinding>() {
 
     private val clientMainViewModel by activityViewModels<ClientMainViewModel>()
+
     private val adminMainViewModel by activityViewModels<AdminMainViewModel>()
 
     private var _projectAdapter: GenericAdapter<Project, ProjectCardItemBinding>? = null
@@ -147,10 +148,6 @@ class ProjectsFragment : BindingFragment<FragmentProjectsBinding>() {
         val outputFormat = SimpleDateFormat("MMMM dd, yyyy", Locale.getDefault())
         val date = inputFormat.parse(inputDate)
         return outputFormat.format(date)
-    }
-
-    override fun onResume() {
-        super.onResume()
     }
 
     private fun initializeChips(siteListType: ArrayList<String>) {

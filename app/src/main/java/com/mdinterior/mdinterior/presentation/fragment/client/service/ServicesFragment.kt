@@ -11,6 +11,7 @@ import com.mdinterior.mdinterior.databinding.SerivesItemBinding
 import com.mdinterior.mdinterior.domain.firebase.FireBaseEvents
 import com.mdinterior.mdinterior.presentation.adapter.GenericAdapter
 import com.mdinterior.mdinterior.presentation.fragment.BindingFragment
+import com.mdinterior.mdinterior.presentation.helper.Base64Convertor
 import com.mdinterior.mdinterior.presentation.helper.Extensions.hideView
 import com.mdinterior.mdinterior.presentation.helper.Extensions.showView
 import com.mdinterior.mdinterior.presentation.helper.JsonConvertor
@@ -47,8 +48,8 @@ class ServicesFragment : BindingFragment<FragmentServicesBinding>() {
     }
 
     private fun observables() {
-        viewModel.servicesData.observe(viewLifecycleOwner){
-            when(it){
+        viewModel.servicesData.observe(viewLifecycleOwner) {
+            when (it) {
                 is FireBaseEvents.FirebaseError -> {
                     Log.e("home", it.error)
                     binding.progressbar.hideView()
@@ -75,6 +76,7 @@ class ServicesFragment : BindingFragment<FragmentServicesBinding>() {
                 itemBinding.apply {
                     serviceName.text = itemData.service
                     serviceDetails.text = itemData.details
+//                    imageView2.setImageBitmap(Base64Convertor.convertToBitmap(itemData.image ?: ""))
                 }
             })
         binding.servicesRv.adapter = serviceAdapter
